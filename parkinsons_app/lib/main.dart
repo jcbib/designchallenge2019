@@ -86,7 +86,7 @@ class _DailyTrackerState extends State<DailyTracker> {
                   Icons.format_list_bulleted,
                   size:40,
                  ),
-                 title: Text('To-Do'),
+                 title: new Text('To-Do'),
 
               )
             ],

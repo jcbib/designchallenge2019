@@ -28,8 +28,6 @@ class TimeSeriesSteps {
 }
 
 class StepCollectors {
-
-
   main() {
     var config = new File("output.txt");
     List<String> lines = config.readAsLinesSync();
@@ -46,6 +44,7 @@ class DailyTracker extends StatefulWidget {
 class _DailyTrackerState extends State<DailyTracker> {
 
   String text = "";
+  String todaySteps = "";
 
   void main() async{
     /// Assumes the given path is a text-file-asset.
@@ -59,7 +58,6 @@ class _DailyTrackerState extends State<DailyTracker> {
   @override
   Widget build(BuildContext context) {
     main();
-
 
     List<String> lines = text.split("\n");
     List<String> dates = new List<String>();
@@ -87,14 +85,6 @@ class _DailyTrackerState extends State<DailyTracker> {
       DateTime date = new DateTime(dateInts[0], dateInts[1], dateInts[2]);
       double steps = dataPair[s];
       data.add(new TimeSeriesSteps(date, steps));
-    }
-
-    String todaySteps = "";
-
-    if ( data.isEmpty ) {
-      todaySteps = "64";
-    } else {
-      todaySteps = data[data.length - 1].steps.round().toString();
     }
 
     var series = [
