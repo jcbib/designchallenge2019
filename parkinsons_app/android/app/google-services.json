@@ -1,39 +1,32 @@
 {
   "project_info": {
-    "project_number": "405389955393",
-    "firebase_url": "https://design-challenge-events.firebaseio.com",
-    "project_id": "design-challenge-events",
-    "storage_bucket": "design-challenge-events.appspot.com"
+    "project_number": "269276976638",
+    "firebase_url": "https://design-challenge-steps.firebaseio.com",
+    "project_id": "design-challenge-steps",
+    "storage_bucket": "design-challenge-steps.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:405389955393:android:95576651f7db4797",
+        "mobilesdk_app_id": "1:269276976638:android:95576651f7db4797",
         "android_client_info": {
           "package_name": "com.example.parkinsonsapp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "405389955393-3bk75dtle2du6gc9rvc8qa6nja785jkc.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCqyLYNW65vQYSUjFJJXnf5WsxccgfHSXg"
+          "current_key": "AIzaSyD3fii8rmOXCeMHlW0-kWD4pY3QDzg8Dsk"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269276976638-cpgkcjd0dji20lg8lbrn861ukrod8pr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
