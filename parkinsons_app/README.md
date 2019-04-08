@@ -1,4 +1,4 @@
-# flutter_app
+# parkinsons_app
 
 A new Flutter application.
 

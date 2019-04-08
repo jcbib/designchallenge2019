@@ -1,82 +1,104 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'activitypage.dart';
+import 'calendarpage.dart';
+import 'todolistpage.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  //This widget is the root of your application
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
-      home: RandomWords(),
+      title: 'App',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      home: new DailyTracker(),
     );
   }
 }
 
-class RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+/// Sample time series data type.
+class TimeSeriesSales {
+  final DateTime time;
+  final int sales;
 
-  Widget _buildSuggestions() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return Divider();
+  TimeSeriesSales(this.time, this.sales);
+}
 
-        final index = i ~/ 2;
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      });
-  }
+class DailyTracker extends StatefulWidget {
 
-  Widget _buildRow(WordPair pair) {
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-    );
-  }
+  @override
+  _DailyTrackerState createState() => new _DailyTrackerState();
+}
+
+class _DailyTrackerState extends State<DailyTracker> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    ActivityPage(),
+    CalendarPage(),
+    ToDoListPage()
+  ];
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Startup Name Generator'),
-      ),
-      body: _buildSuggestions(),
-      drawer: Drawer (
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap:() {
+    return new Scaffold(
 
-              },
-            ),
-          ],
+      body: _children[_currentIndex],
+
+      bottomNavigationBar: new Theme (
+        data: Theme.of(context).copyWith(
+          // sets the background color of the `BottomNavigationBar`
+            canvasColor: Colors.deepPurple,
+            // sets the active color of the `BottomNavigationBar` if `Brightness` is light
+            primaryColor: Colors.white,
+            textTheme: Theme
+                .of(context)
+                .textTheme
+                .copyWith(caption: new TextStyle(color: Colors.grey[400]))), // sets the inactive color of the `BottomNavigationBar`
+        child: Container(
+          height: 75.0,
+          child: new BottomNavigationBar (
+            onTap: onTabTapped,
+            currentIndex: _currentIndex, // this will be set when a new tab is tapped
+            items: [
+              BottomNavigationBarItem(
+                icon: new Icon(
+                    Icons.home,
+                    size: 45,
+                ),
+                title: new Text('Home'),
+
+              ),
+              BottomNavigationBarItem(
+                icon: new Icon(
+                    Icons.calendar_today,
+                    size: 40,
+                ),
+                title: new Text('Calendar'),
+
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.format_list_bulleted,
+                  size:40,
+                 ),
+                 title: Text('To-Do'),
+
+              )
+            ],
+          ),
         ),
       ),
     );
   }
-}
 
-class RandomWords extends StatefulWidget {
-  @override
-  RandomWordsState createState() => new RandomWordsState();
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 }
